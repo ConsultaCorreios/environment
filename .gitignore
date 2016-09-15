@@ -1,0 +1,4 @@
+# VAGRANT DEPENDENCIES
+/vagrant/.bundle
+/vagrant/.vagrant
+/vagrant/correios/*

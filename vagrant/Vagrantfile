@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+    config.vm.box = "ubuntu/trusty64"
+
+    config.vm.synced_folder "./correios", "/correios", create: true
+
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 1536
+    end
+
+    config.ssh.forward_agent = true
+
+    config.vm.provision "shell", path: "./provision/intro.sh", run: always
+    config.vm.provision "shell", path: "./provision/system.sh"
+    config.vm.provision "shell", path: "./provision/php.sh"
+    config.vm.provision "shell", path: "./provision/composer.sh", run: always
+    config.vm.provision "shell", path: "./provision/phpunit.sh"
+
+    config.vm.provision "shell" do |shell|
+        shell.inline = "touch $1 && ssh-keyscan -H $2 >> $1 && chmod 600 $1"
+        shell.args = %q{/root/.ssh/known_hosts "github.com"}
+    end
+
+    config.vm.provision "shell", path: "./provision/git-clone.sh"
+end
