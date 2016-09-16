@@ -1,4 +1,7 @@
-# VAGRANT DEPENDENCIES
+# VAGRANT
 /vagrant/.bundle
 /vagrant/.vagrant
 /vagrant/correios/*
+
+# DOCKER
+/docker/correios
