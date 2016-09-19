@@ -1,19 +1,23 @@
 #! /bin/bash
 
 echo ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-echo "\n:: CLONING CORREIOS APPLICATION \n"
+echo ":: CLONING CORREIOS APPLICATION \n"
 
 rm -rf ./correios
 mkdir ./correios && \
-    git clone git@github.com:ConsultaCorreios/Correios.git ./correios
+    git clone git@github.com:ConsultaCorreios/Correios.git ./correios && \
+    cd ./correios && \
+    git fetch origin && \
+    cd ..
 
 echo "::"
 echo ":: DONE"
 echo ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 
+echo "\n"
 
 echo ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-echo "\n:: INSTALLING COMPOSER DEPENDENCIES \n"
+echo ":: INSTALLING COMPOSER DEPENDENCIES \n"
 
 docker run -it --rm \
     -v $(pwd)/correios:/correios \
@@ -24,4 +28,3 @@ docker run -it --rm \
 echo "::"
 echo ":: DONE"
 echo ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-
